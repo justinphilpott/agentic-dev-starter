@@ -32,7 +32,7 @@
 2. **Commit changes** using conventional commits style
 3. **Suggest next tasks** in 1-2 sentences
 
-## ⚡ RESPONSE STYLE GUIDELINES
+## ⚡ RESPONSE STYLE PROTOCOL
 
 - NO verbose explanations of your thought process
 - NO lengthy summaries of what you've read
