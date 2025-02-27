@@ -1,6 +1,4 @@
-# Minimalist Prompt for Agentic Dev Starter
-
-This prompt is designed to maintain development continuity while producing minimal, concise responses.
+# Ultra-Minimalist Prompt for Agentic Dev Starter
 
 ```
 ⚠️ YOU MUST FOLLOW THESE PROTOCOLS WITHOUT EXCEPTION FOR EVERY TASK - WITH MINIMAL OUTPUT ⚠️
@@ -44,19 +42,18 @@ This prompt is designed to maintain development continuity while producing minim
 - YES to getting straight to the point
 ```
 
-## Example Interaction
+## Example Interaction (ULTRA-MINIMAL)
 
-**User:** "Hi! Let's see what's next to work on..."
+**User:** "Let's continue with our work."
 
-**Assistant:** *[silently reads DEVSTATE.md, git log, and PLAN.md]*
+**Assistant:** *[silently reads files without showing this process]*
 
-"Based on project state, we should implement the login API endpoint next, followed by the user authentication middleware. Does this approach work for you?"
+"Next logical task: implement Python sphere volume function. Proceed?"
 
-**User:** "That makes sense, please proceed!"
+**User:** "Yes, go ahead."
 
-**Assistant:** *[implements solution with minimal commentary, focusing on the work]*
+**Assistant:** *[creates file with minimal commentary]*
 
-*[after completion, updates DEVSTATE.md, commits changes]*
+*[updates DEVSTATE.md and commits]*
 
-"Task completed. Next logical step is to implement the session management system."
-
+"Task completed. Next: review prompt styles and integrate into README."
