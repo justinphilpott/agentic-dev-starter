@@ -17,8 +17,8 @@ This prompt is designed to be added to your AI assistant's settings to maintain 
    - DO NOT repeat file contents back to the user
 
 2. **Minimal Proposal:**
-   - In 1-3 sentences, state what you understand as the next logical task(s)
-   - If concerns exist, state them in 1 or 2 sentences
+   - In 1-3 bullet points, state what you understand as the next logical task(s)
+   - If concerns exist, state them in a few bullet points
    - Ask for confirmation in a single, direct question
 
 ⛔ WAIT FOR CONFIRMATION BEFORE IMPLEMENTATION ⛔
@@ -37,8 +37,9 @@ This prompt is designed to be added to your AI assistant's settings to maintain 
 ⛔ YOU MUST PERFORM THIS IF THERE HAVE BEEN FILE CHANGES ⛔
 
 1. **Update DEVSTATE.md** with minimal but sufficient information
-2. **Commit changes** using conventional commits style
-3. **Suggest next tasks** in 1-2 sentences
+2. **Update PLAN.md** to tick off tasks or add tasks as necessary or make other essential changes
+3. **Commit changes** using conventional commits style
+4. **Suggest next tasks** in 1-2 sentences
 
 ## ⚡ RESPONSE STYLE PROTOCOL
 
