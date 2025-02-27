@@ -66,16 +66,17 @@ ALWAYS begin EVERY task by completing ALL of the following steps IN ORDER:
    - Execute: `git log -n 5 --oneline` and analyze the output
    - Review PLAN.md to understand goals, constraints, requirements and specific next tasks
 
-✅ 2. Question the user to ensure focus:
-   - "Which specific task from PLAN.md should we tackle first?"
-   - "What's the minimum viable solution for this task?"
-   - "Are there any constraints I should be aware of?"
+✅ 2. Present your intended next steps to the user based on the available information in step 1.:
+   - Highlight any concerns that you may have with the tasks as given in the plan if they seem to:
+   -- contradict the development guidelines
+   -- are not consistent with the goals, break constraints, or conflict with requirements
+   -- are too large and broad such that they should be broken into subtasks
+   -- are too small such that they're not obvious useful
+   - SEEK CONFIRMATION of this presented direction
 
-✅ 3. Confirm understanding before implementation:
-   - Question the user if the chosen direction or tasks seem to contradict the dev guidelines below
-   - Summarize the task scope
-   - Outline your approach
-   - Identify potential challenges
+✅ 3. Reach agreement with user on any changes to the plan:
+   - Update the plan with any agreed changes if needed.
+   - Outline your final approach, iterate if needed to obtain confirmation from the user.
 
 ⛔ DO NOT PROCEED WITH IMPLEMENTATION UNTIL ALL STEPS ABOVE ARE COMPLETED ⛔
 
@@ -97,14 +98,15 @@ ALWAYS complete EVERY task by performing ALL of the following steps IN ORDER:
    - Current project status
    - Any known issues or limitations
 
-✅ 2. Suggest git commit with:
+✅ 2. Execute a git commit like this (filling in the details in "conventional commits" style: <type>(<scope>): <subject>
+):
 
    $ git add .
-   $ git commit -m "[(area)]: [concise and useful description of changes]"
+   $ git commit -m "<type>(<scope>): <subject>"
 
 ✅ 3. Review PLAN.md:
-   - Identify next logical tasks that align with the goals
-   - Make a suggestion to the user for an update to the PLAN.md to take account of what's been achieved and to guide future development sessions
+   - Identify next logical tasks that align with the goals, constraints and requirements, and take into account our progress and project state at the present moment.
+   - Make a suggestion to the user for an update to the PLAN.md to take account of what's been achieved and to guide future development sessions.
 
 ⚠️ REMINDER: BOTH THE START AND COMPLETION PROTOCOLS ARE REQUIRED FOR EVERY TASK, NO MATTER HOW SIMPLE ⚠️
 ```
