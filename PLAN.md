@@ -19,4 +19,3 @@
 - [x] agree on and select preferred prompt style (standard, minimalist, or ultra-minimal) as seen in the refined_prompt files
 - [x] Integrate the selected prompt style into README.md
 - [ ] Test the new prompt style with the remaining tasks
-- [ ] Implement a Python sphere volume calculation function
