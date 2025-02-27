@@ -2,6 +2,9 @@
 
 A minimal framework for effective AI-assisted development.
 
+## TLDR
+A simple framework to maintain context between AI assistant sessions using just two files (DEVSTATE.md, PLAN.md) and a prompt. Helps keep AI-assisted development focused and efficient by preserving state between sessions while keeping each interaction targeted on specific tasks.
+
 ## Contents
 - [Purpose](#purpose)
 - [The Problem](#the-problem)
@@ -9,7 +12,7 @@ A minimal framework for effective AI-assisted development.
 - [The Files](#the-files)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
-- [Development Continuity Prompt](#development-continuity-prompt-to-help-keep-agentic-development-workflows-flows-on-track)
+- [Development Continuity Prompt](#development-continuity-prompt)
 - [Usage Example](#usage-example)
 - [Contrib](#contrib)
 
@@ -33,12 +36,13 @@ In this context, we need to retain state *between* tasks. This requires two thin
 
 ## A solution
 
-This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and one prompt (below) to provide in the settings for your agent so that it reads this on every request.
+This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and one prompt (in PROMPT.md) to provide in the settings for your agent so that it reads this on every request.
 
 ## The files
 
 - **DEVSTATE.md**: The LLM overwrites this file on completion of every task to record the current development status for the next session to pick up.
 - **PLAN.md**: This user manages this file which details ideally short-term and clear goals, constraints, requirements, and focused tasks that lead to the goal. The LLM may update this file also, but the user needs to ensure that the goals, tasks and other information are concise, congruent and focused towards their development aims.
+- **PROMPT.md**: Contains the prompt to be added to your AI assistant's settings.
 
 ## Requirements
 
@@ -46,75 +50,28 @@ This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and o
 - VSCode or similar dev environment which allows chat based coding agents to be installed.
 - Some agentic coding assistant where the agent can be provided with "the prompt" in settings.
 
-## Development continuity prompt for ultra-minimal interactions
+## Development Continuity Prompt
 
-Provide the following prompt below to your agent via settings (for example if using Cline in VSCode, click settings -> input prompt to the custom instructions box -> click Done.)
-
-The ultra-minimal prompt style focuses on maximum efficiency with minimal verbosity, while maintaining all essential functionality.
-
-```
-⚠️ YOU MUST FOLLOW THESE PROTOCOLS WITHOUT EXCEPTION FOR EVERY TASK - WITH MINIMAL OUTPUT ⚠️
-
-## 🔄 TASK START PROTOCOL
-
-1. **Silent Context Gathering:**
-   - Read DEVSTATE.md, check recent git commits, and review PLAN.md
-   - DO NOT output detailed summaries of what you've read
-   - DO NOT repeat file contents back to the user
-
-2. **Minimal Proposal:**
-   - In 1-3 sentences, state what you understand as the next logical task(s)
-   - If concerns exist, state them in 1 or 2 sentences
-   - Ask for confirmation in a single, direct question
-
-⛔ WAIT FOR CONFIRMATION BEFORE IMPLEMENTATION ⛔
-
-## 📋 DEVELOPMENT GUIDELINES
-
-1. MINIMIZE CODE: Use existing solutions when possible
-2. NARROW SCOPE: Build minimum viable solutions
-3. SIMPLIFY: Choose straightforward approaches
-4. INCREMENTAL: Deliver in small, independent units
-5. CHALLENGE: Question if >20 lines of code are needed
-6. COMPLETE: Focus on finishing rather than future-proofing
-
-## 🏁 TASK COMPLETION PROTOCOL
-
-1. **Update DEVSTATE.md** with minimal but sufficient information
-2. **Commit changes** using conventional commits style
-3. **Suggest next tasks** in 1-2 sentences
-
-## ⚡ RESPONSE STYLE PROTOCOL
-
-- NO verbose explanations of your thought process
-- NO lengthy summaries of what you've read
-- NO repetition of information the user already knows
-- NO unnecessary pleasantries or conversational fillers
-- YES to direct, information-dense responses
-- YES to getting straight to the point
-```
+The development continuity prompt has been moved to its own file. See [PROMPT.md](PROMPT.md) for the prompt to add to your AI assistant's settings.
 
 ## Getting Started
 
-1. **Clone or create a new repository**:
+1. **Choose your approach**:
    ```bash
-   # Either create a new project
-   mkdir my-agentic-project
-   cd my-agentic-project
-   git init
-   
-   # Or clone this starter repository
+   # Either clone this starter repository
    git clone https://github.com/yourusername/agentic-dev-starter.git
    cd agentic-dev-starter
+   
+   # Or copy the files to your existing project
+   # Just copy PLAN.md, DEVSTATE.md, PROMPT.md, and README.md to your project
    ```
 
-2. **Create the required files**:
-   - Copy the PLAN.md, DEVSTATE.md, and README.md files to your project
+2. **Set up your project**:
    - Customize PLAN.md with your project goals, constraints, and initial tasks
    - Initialize DEVSTATE.md with your project's starting state
 
 3. **Configure your AI assistant**:
-   - Copy the prompt from the section below into your AI assistant's settings
+   - Copy the prompt from PROMPT.md into your AI assistant's settings
    - Ensure your assistant has access to read and write files in your project
 
 ## Usage Example
