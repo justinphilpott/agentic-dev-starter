@@ -55,25 +55,31 @@ You may want to edit the prompt to your liking and according to your project and
 ## --- THE prompt ---
 
 ```
-## TASK START PROTOCOL
+⚠️ IMPORTANT: THE FOLLOWING PROTOCOLS ARE MANDATORY AND MUST BE FOLLOWED IN ORDER FOR EVERY TASK, WITHOUT EXCEPTION ⚠️
 
-1. Review current project state:
+## 🔄 MANDATORY TASK START PROTOCOL
+
+ALWAYS begin EVERY task by completing ALL of the following steps IN ORDER:
+
+✅ 1. Review current project state:
    - Check DEVSTATE.md for current development status
-   - Examine git history: `git log -n 5 --oneline`
-   - Review PLAN.md to be clear on goals, constraints, requirements and specific next tasks
+   - Execute: `git log -n 5 --oneline` and analyze the output
+   - Review PLAN.md to understand goals, constraints, requirements and specific next tasks
 
-2. Question the user to ensure focus:
+✅ 2. Question the user to ensure focus:
    - "Which specific task from PLAN.md should we tackle first?"
    - "What's the minimum viable solution for this task?"
    - "Are there any constraints I should be aware of?"
 
-3. Confirm understanding before implementation:
+✅ 3. Confirm understanding before implementation:
    - Question the user if the chosen direction or tasks seem to contradict the dev guidelines below
    - Summarize the task scope
    - Outline your approach
    - Identify potential challenges
 
-## DEVELOPMENT GUIDELINES
+⛔ DO NOT PROCEED WITH IMPLEMENTATION UNTIL ALL STEPS ABOVE ARE COMPLETED ⛔
+
+## 📋 DEVELOPMENT GUIDELINES
 
 1. MINIMIZE CODE: Prefer and actively seek for zero-code solutions, and existing libraries
 2. NARROW SCOPE: Implement minimum viable solution only
@@ -82,21 +88,25 @@ You may want to edit the prompt to your liking and according to your project and
 5. CHALLENGE ASSUMPTIONS: Question if more than 20 lines of code are necessary
 6. PRIORITIZE COMPLETION: Focus on getting to "done" rather than future-proofing
 
-## TASK COMPLETION PROTOCOL
+## 🏁 MANDATORY TASK COMPLETION PROTOCOL
 
-1. Overwrite DEVSTATE.md with:
+ALWAYS complete EVERY task by performing ALL of the following steps IN ORDER:
+
+✅ 1. Overwrite DEVSTATE.md with:
    - Concise description of completed task
    - Current project status
    - Any known issues or limitations
 
-2. Suggest git commit with:
+✅ 2. Suggest git commit with:
 
    $ git add .
    $ git commit -m "[(area)]: [concise and useful description of changes]"
 
-3. Review PLAN.md:
+✅ 3. Review PLAN.md:
    - Identify next logical tasks that align with the goals
    - Make a suggestion to the user for an update to the PLAN.md to take account of what's been achieved and to guide future development sessions
+
+⚠️ REMINDER: BOTH THE START AND COMPLETION PROTOCOLS ARE REQUIRED FOR EVERY TASK, NO MATTER HOW SIMPLE ⚠️
 ```
 
 ## Getting Started
