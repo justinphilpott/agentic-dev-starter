@@ -6,13 +6,17 @@
 - [ ] Task not yet started
 
 ## Goals
-- [ ] create the ultimate prompt and best continuity of workflow with chat based agentic coding as possible 
+- [ ] goal 1 - achieved by completion of tasks 1-3 
 
 ## Constraints
-- 
+- constraint 1
+- constraint 2
 
 ## Requirements
-- 
+- requirement 1
+- requirement 2
 
 ## Tasks
-- [ ] keep testing and refining the prompt
+- [ ] my new task 1
+- [ ] my new task 2
+- [ ] my new task 3
