@@ -47,7 +47,7 @@ This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and o
 1. **Choose your approach**:
    ```bash
    # Either clone this starter repository
-   git clone https://github.com/yourusername/agentic-dev-starter.git
+   git clone https://github.com/justinphilpott/agentic-dev-starter.git
    cd agentic-dev-starter
    
    # Or copy the files to your existing project
