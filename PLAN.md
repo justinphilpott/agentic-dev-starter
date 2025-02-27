@@ -17,4 +17,5 @@
 ## Tasks
 - [ ] Write a function in javascript in an index.js file to calculate the square of a given number
 - [ ] Write a function in python to calculate the volume of a sphere of given radius
-- [!] Evaluate how I can refine the prompt in the readme file to make the task start protocol be less verbose before we actually get to doing some work
+- [x] Evaluate how I can refine the prompt in the readme file to make the task start protocol be less verbose before we actually get to doing some work
+- [ ] Review and integrate the refined prompt into README.md
