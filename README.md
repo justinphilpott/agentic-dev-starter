@@ -38,8 +38,8 @@ This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and o
 
 ## The files and their purpose
 
-- **DEVSTATE.md**: The LLM overwrites this file after completing each task to record the current development status for the next session.
-- **PLAN.md**: User-managed file detailing short-term goals, constraints, requirements, and focused tasks. The LLM may update this file, but the user ensures the content remains concise and focused.
+- **DEVLOG.md**: Tracks development progress and changes between sessions. The LLM updates this file after each task to maintain context.
+- **CONTEXT.md**: Provides project-specific context, constraints and requirements to guide development.
 - **PROMPT.md**: Contains the prompt to add to your AI assistant's settings.
 
 ## Getting Started
@@ -55,8 +55,8 @@ This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and o
    ```
 
 2. **Set up your project**:
-   - Customize PLAN.md with your project goals, constraints, and initial tasks
-   - Initialize DEVSTATE.md with your project's starting state
+   - Customize CONTEXT.md with your project goals, constraints, and requirements
+   - Initialize DEVLOG.md with your project's starting state
 
 3. **Configure your AI assistant**:
    - Copy the prompt from PROMPT.md into your AI assistant's settings
@@ -71,23 +71,23 @@ This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and o
 ## Usage Example
 
 1. **Initialize your project**:
-   - Create PLAN.md with your initial goals and tasks
-   - Create an empty DEVSTATE.md file
+   - Create CONTEXT.md with your project goals, constraints and requirements
+   - Create an empty DEVLOG.md file
 
 2. **Start your first development session**:
    - Open your project in VSCode with your AI assistant
-   - Ask your assistant to help with a specific task from PLAN.md
-   - The assistant will follow the Task Start Protocol to understand the current state
+   - The assistant will read CONTEXT.md to understand project requirements
+   - The assistant will read DEVLOG.md to understand current state
 
 3. **Complete the task**:
    - Work with the assistant to implement the solution
-   - The assistant will follow the Task Completion Protocol
-   - DEVSTATE.md will be updated with the current status
+   - The assistant will follow the Session Completion Protocol
+   - DEVLOG.md will be updated with the current status
    - A git commit will be suggested
 
 4. **Continue development**:
-   - In your next session, the assistant will read DEVSTATE.md to understand what's been done
-   - Select the next task from PLAN.md
+   - In your next session, the assistant will read DEVLOG.md to understand what's been done
+   - The assistant will read CONTEXT.md to maintain project context
    - Repeat the process
 
 This approach maintains context between development sessions while keeping each interaction focused and efficient.
