@@ -5,6 +5,10 @@
 
 ## History
 
+### 2025-03-02 23:08
+- Removed remaining references to DEVSTATE and PLAN from README.md
+- Updated framework description and file copy instructions
+
 ### 2025-03-02 23:05
 - Updated README.md to replace references to DEVSTATE and PLAN with DEVLOG and CONTEXT
 - Modified file purpose descriptions and usage example to reflect new file structure

@@ -3,7 +3,7 @@
 A minimal framework for effective AI-assisted development.
 
 ## TLDR
-A simple framework to maintain context between AI assistant sessions using just two files (DEVSTATE.md, PLAN.md) and a prompt (PROMPT.md). Helps keep AI-assisted development focused and efficient by preserving state between sessions while keeping each interaction targeted on specific tasks and goals.
+A simple framework to maintain context between AI assistant sessions using DEVLOG.md, CONTEXT.md and PROMPT.md. Helps keep AI-assisted development focused and efficient by preserving state between sessions while keeping each interaction targeted on specific tasks and goals.
 
 ## Contents
 - [Purpose](#purpose)
@@ -34,7 +34,7 @@ It makes sense to work with short sessions focused on atomic tasks. However, whe
 
 ## A solution
 
-This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and one prompt (in PROMPT.md) that you add to your agent's settings to be read on every request.
+This framework uses DEVLOG.md, CONTEXT.md, and PROMPT.md along with git to maintain development context. The prompt in PROMPT.md is added to your agent's settings to be read on every request.
 
 ## The files and their purpose
 
@@ -51,7 +51,7 @@ This framework uses just two files (DEVSTATE.md, PLAN.md), one tool (git), and o
    cd agentic-dev-starter
    
    # Or copy the files to your existing project
-   # Just copy PLAN.md and DEVSTATE.md to your project
+   # Just copy CONTEXT.md and DEVLOG.md to your project
    ```
 
 2. **Set up your project**:
