@@ -1,96 +1,63 @@
 # Agentic Dev Starter
 
-A minimal framework for effective AI-assisted development.
-
-## TLDR
-A simple framework to maintain context between AI assistant sessions using DEVLOG.md, CONTEXT.md and PROMPT.md. Helps keep AI-assisted development focused and efficient by preserving state between sessions while keeping each interaction targeted on specific tasks and goals.
+An minimal and experimental micro-framework for custom prompting Cline+Claude (or similar).
 
 ## Contents
 - [Purpose](#purpose)
-- [The Problem](#the-problem)
-- [A Solution](#a-solution)
 - [The Files](#the-files)
 - [Getting Started](#getting-started)
 - [Requirements](#requirements)
 - [Development Continuity Prompt](#development-continuity-prompt)
-- [Usage Example](#usage-example)
 - [Contrib](#contrib)
 
 ## Purpose
 
-This micro-framework provides a simple set of files and a prompt template to streamline LLM-augmented development workflows.
+This micro-framework provides a simple set of files and a selection of prompts for assisting with different kinds of coding workflows. 
 
-(Tested with Cline and Claude 3.x Sonnet/Haiku)
+## The files
 
-## The problem
+- **DEVLOG.md**: LLM authored: Tracks development progress and changes between sessions. The LLM updates this file after each task (prior to commit) to maintain a more detailed (if necessary) history than a commit log. This helps retain reasoning and thought process where necessary.
+- **CONTEXT.md**: HUMAN authored: Provides project-specific context, constraints and requirements to guide development, this should change rarely.
 
-When working with chat-based coding agents, the length of the prompt increases with every message in the same session, making each request progressively more expensive.
+## Prompts
 
-Long-running chats can reach a point of "diminished returns" when focus, direction, or subject changes within the chat.
-
-It makes sense to work with short sessions focused on atomic tasks. However, when working toward a larger goal, we need to retain state *between* tasks by:
-- Prompting the agent on how to start and finish tasks
-- Prompting the agent on how to read and write state
-
-## A solution
-
-This framework uses DEVLOG.md, CONTEXT.md, and PROMPT.md along with git to maintain development context. The prompt in PROMPT.md is added to your agent's settings to be read on every request.
-
-## The files and their purpose
-
-- **DEVLOG.md**: Tracks development progress and changes between sessions. The LLM updates this file after each task to maintain context.
-- **CONTEXT.md**: Provides project-specific context, constraints and requirements to guide development.
-- **PROMPT.md**: Contains the prompt to add to your AI assistant's settings.
+### context-history-commit.md
+This is a prompt to get your agent to obtain context and project history from the two file 
+- Session start: read context (CONTEXT.md) and history (DEVLOG.md)
+- Dev guidelines,
+- Session finish: update DEVLOG.md, commit, complete.
 
 ## Getting Started
 
-1. **Choose your approach**:
+1. **Choose a prompt**:
+   - Browse the prompts/ directory to select a workflow
+   - Each prompt comes with its own set of files (CONTEXT.md, DEVLOG.md, etc.)
+
+2. **Copy files to your project**:
    ```bash
-   # Either clone this starter repository
-   git clone https://github.com/justinphilpott/agentic-dev-starter.git
-   cd agentic-dev-starter
-   
-   # Or copy the files to your existing project
-   # Just copy CONTEXT.md and DEVLOG.md to your project
+   # Copy the selected prompt's files to your project root
+   cp -r prompts/your-chosen-prompt/* .
    ```
 
-2. **Set up your project**:
-   - Customize CONTEXT.md with your project goals, constraints, and requirements
+3. **Set up your project**:
+   - Customize CONTEXT.md with your project goals and constraints
    - Initialize DEVLOG.md with your project's starting state
+   - Update your AI assistant's settings with the chosen prompt
 
-3. **Configure your AI assistant**:
-   - Copy the prompt from PROMPT.md into your AI assistant's settings
-   - Ensure your assistant has access to read and write files in your project
+4. **Start working**:
+   - Open your project in VSCode with your AI assistant
+   - The assistant will read CONTEXT.md for project requirements
+   - The assistant will read DEVLOG.md to understand current state
+   - Work with the assistant to implement solutions
+   - The assistant will follow the Session Completion Protocol:
+     * Update DEVLOG.md with progress
+     * Commit changes with conventional commit messages
 
 ## Requirements
 
 - Git
 - VSCode or similar dev environment that supports chat-based coding agents
-- An agentic coding assistant that allows custom prompts in settings
-
-## Usage Example
-
-1. **Initialize your project**:
-   - Create CONTEXT.md with your project goals, constraints and requirements
-   - Create an empty DEVLOG.md file
-
-2. **Start your first development session**:
-   - Open your project in VSCode with your AI assistant
-   - The assistant will read CONTEXT.md to understand project requirements
-   - The assistant will read DEVLOG.md to understand current state
-
-3. **Complete the task**:
-   - Work with the assistant to implement the solution
-   - The assistant will follow the Session Completion Protocol
-   - DEVLOG.md will be updated with the current status
-   - A git commit will be suggested
-
-4. **Continue development**:
-   - In your next session, the assistant will read DEVLOG.md to understand what's been done
-   - The assistant will read CONTEXT.md to maintain project context
-   - Repeat the process
-
-This approach maintains context between development sessions while keeping each interaction focused and efficient.
+- An agentic coding assistant that allows custom prompts in settings, for example Cline
 
 ## Contrib
 
