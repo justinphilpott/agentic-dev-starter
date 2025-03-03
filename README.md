@@ -1,6 +1,6 @@
 # Agentic Dev Starter
 
-An minimal and experimental micro-framework for custom prompting Cline+Claude (or similar).
+An minimal and experimental micro-framework for custom prompting Cline+Claude to create custom workflows (or similar).
 
 ## Contents
 - [Purpose](#purpose)
@@ -10,48 +10,28 @@ An minimal and experimental micro-framework for custom prompting Cline+Claude (o
 - [Development Continuity Prompt](#development-continuity-prompt)
 - [Contrib](#contrib)
 
-## Purpose
+## Workflows
 
-This micro-framework provides a simple set of files and a selection of prompts for assisting with different kinds of coding workflows. 
+This micro-framework provides a set of workflow definitions that each comprise the following:
 
-## The files
+- A prompt, to be supplied as the "custom instructions" for the agentic extension in use (for example Cline)
+- A set of supporting files that are intended to help the LLM to maintain state and direction between sessions, and to define other required agentic functionaltiy.
 
-- **DEVLOG.md**: LLM authored: Tracks development progress and changes between sessions. The LLM updates this file after each task (prior to commit) to maintain a more detailed (if necessary) history than a commit log. This helps retain reasoning and thought process where necessary.
-- **CONTEXT.md**: HUMAN authored: Provides project-specific context, constraints and requirements to guide development, this should change rarely.
+A workflow can be very simple, for example the "context-history-commit" workflow (see the README in ...), or potentially more complex involving MCP tools to create some very useful agentic flows.
 
-## Prompts
+This is an experimental WIP. 
 
-### context-history-commit.md
-This is a prompt to get your agent to obtain context and project history from the two file 
-- Session start: read context (CONTEXT.md) and history (DEVLOG.md)
-- Dev guidelines,
-- Session finish: update DEVLOG.md, commit, complete.
+### 1. "context-history-commit"
 
-## Getting Started
+Named to indicate the basic flow of: read context and history, perform user directed tasks, update the history, commit and finish.
 
-1. **Choose a prompt**:
-   - Browse the prompts/ directory to select a workflow
-   - Each prompt comes with its own set of files (CONTEXT.md, DEVLOG.md, etc.)
+See the [workflow README](workflows/context-history-commit/README.md) for detailed instructions.
 
-2. **Copy files to your project**:
-   ```bash
-   # Copy the selected prompt's files to your project root
-   cp -r prompts/your-chosen-prompt/* .
-   ```
+Key files:
+- **DEVLOG.md**: LLM authored: Tracks development progress and changes between sessions. The LLM updates this file after each task (prior to commit) to maintain a more detailed (if necessary) history than a commit log. This helps retain reasoning chains and associated conclusions and decisions where necessary.
+- **CONTEXT.md**: HUMAN authored: Provides high-level project-specific context, goals, constraints and requirements to guide development, this should change rarely.
+- **prompt.md**: The specific prompt to be supplied to the custom instructions in your agentic extension.
 
-3. **Set up your project**:
-   - Customize CONTEXT.md with your project goals and constraints
-   - Initialize DEVLOG.md with your project's starting state
-   - Update your AI assistant's settings with the chosen prompt
-
-4. **Start working**:
-   - Open your project in VSCode with your AI assistant
-   - The assistant will read CONTEXT.md for project requirements
-   - The assistant will read DEVLOG.md to understand current state
-   - Work with the assistant to implement solutions
-   - The assistant will follow the Session Completion Protocol:
-     * Update DEVLOG.md with progress
-     * Commit changes with conventional commit messages
 
 ## Requirements
 

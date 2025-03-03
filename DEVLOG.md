@@ -5,6 +5,11 @@
 
 ## History
 
+### 2025-03-03 15:47
+- Updated README.md to properly reference workflow README
+- Added link to workflow-specific documentation
+- Streamlined file descriptions in main README
+
 ### 2025-03-03 09:38
 - Updated README.md to combine "Getting Started" and "Usage Example" sections
 - Reflected new prompt organization structure in README
