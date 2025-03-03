@@ -5,10 +5,10 @@
 
 ## History
 
-### 2025-03-03 15:47
-- Updated README.md to properly reference workflow README
-- Added link to workflow-specific documentation
-- Streamlined file descriptions in main README
+### 2025-03-03 16:13
+- Updated README.md table of contents to match actual section headings
+- Removed non-existent section references
+- Added missing "Workflows" section to index
 
 ### 2025-03-03 09:38
 - Updated README.md to combine "Getting Started" and "Usage Example" sections

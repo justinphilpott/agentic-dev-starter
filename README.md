@@ -4,10 +4,8 @@ An minimal and experimental micro-framework for prompting Cline+Claude (or simil
 
 ## Contents
 - [Purpose](#purpose)
-- [The Files](#the-files)
-- [Getting Started](#getting-started)
+- [Workflows](#workflows)
 - [Requirements](#requirements)
-- [Development Continuity Prompt](#development-continuity-prompt)
 - [Contrib](#contrib)
 
 ## Workflows
@@ -17,7 +15,7 @@ This micro-framework provides a set of workflow definitions that each comprise t
 - A prompt, to be supplied as the "custom instructions" for the agentic extension in use (for example Cline)
 - A set of supporting files that are intended to help the LLM to maintain state and direction between sessions, and to augment and provide context for general agentic functionaltiy.
 
-A workflow can be very simple, for example the "context-history-commit" workflow (see below), or potentially more complex involving MCP tools to create some very useful agentic flows.
+A workflow can be very simple, for example the "context-history-commit" workflow (see below), or potentially more complex involving [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) tools to create some very useful agentic flows.
 
 This is an experimental WIP, please test and use accordinly.
 
