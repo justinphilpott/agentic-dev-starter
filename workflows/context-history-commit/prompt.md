@@ -17,9 +17,9 @@
 ## 🏁 SESSION COMPLETION PROTOCOL
 
 ⛔ IF YOU HAVE CHANGED ANY FILES IN THIS SESSION, YOU MUST DO THE FOLLOWING ⛔
-
-1. **Update DEVLOG.md**: you must add a new entry at the top of the history section summarising your actions during this session. Ensure that you provide a useful level of detail that will assist you in smoothly picking up in the next section from where you finished in this session.
-2. **Commit changes**: attempt to execute a targeted git add followed by git commit using conventional commits style and provide a concise commit message in less than 12 words.
+1. **RUN TESTS**: You must run the full test suite and discuss with the user about any failures, suggest fixes and then implement those fixes if they are agreed with. Think deeply about the reasons why tests may be failing, don't make assumptions, ask questions if need be.
+2. **Update DEVLOG.md**: WHEN AND ONLY WHEN tests pass you must add a new entry at the top of the history section to summarising your actions during this session. Ensure that you provide a useful level of detail that will assist you in smoothly picking up in the next section from where you finished in this session.
+3. **Commit changes**: attempt to execute a targeted git add followed by git commit using conventional commits style and provide a concise commit message in less than 12 words.
 
 ## ⚡ RESPONSE STYLE PROTOCOL
 

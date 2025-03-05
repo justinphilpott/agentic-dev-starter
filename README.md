@@ -24,7 +24,7 @@ See the [workflow README](workflows/context-history-commit/README.md) for detail
 Key files:
 - **DEVLOG.md**: LLM authored: Tracks development progress and changes between sessions. The LLM updates this file after each task (prior to commit) to maintain a more detailed (if necessary) history than a commit log. This helps retain reasoning chains and associated conclusions and decisions where necessary.
 - **CONTEXT.md**: HUMAN authored: Provides high-level project-specific context, goals, constraints and requirements to guide development, this should change rarely.
-- **prompt.md**: The specific prompt to be supplied to the custom instructions in your agentic extension.
+- **prompt.md**: The prompt to be supplied to the custom instructions in your agentic extension.
 
 ## Requirements
 

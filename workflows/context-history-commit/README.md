@@ -5,8 +5,10 @@ Agentic directive overview:
 - Read the project history from DEVLOG.md
 - Read the project context from CONTEXT.md 
 - Proceed according to the users instructions
-- Summarise in detail any thought processes, conclusions and specific actions taken in this session, int eh DEVLOG.
+- Ensure tests pass prior to completion.
+- Summarise in detail any thought processes, conclusions and specific actions taken in this session, in the DEVLOG.
 - Attempt to commit work.
+- Complete.
 
 Files:
 
