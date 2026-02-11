@@ -4,6 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 Seed is a CLI + skill system for agentic development.
+
 It gives you one path for new projects and one path for existing projects:
 
 - New project: run `seed <target-dir>` (or `scripts/new-poc.sh`) in an empty directory.
