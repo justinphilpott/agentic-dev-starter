@@ -11,6 +11,16 @@ Why not <alternative>: (optional)
 
 ## History
 
+### 2026-02-11: Reworked README for seconds-to-skim clarity
+Context: The previous README mixed explanation and instruction, making first-pass scanning harder.
+Decision: Restructure README to `What / How / Why / Where / When`, add prerequisites and immediate usage examples, and keep prose short with clear exit ramps.
+Why not keep prior structure: Faster relevance checks and faster first-run success matter more than narrative completeness in a POC starter.
+
+### 2026-02-11: Added install command for global `seed` CLI
+Context: The scaffold command should be runnable from any new idea directory without referencing this repo path manually.
+Decision: Add `scripts/install-cli.sh` to create a global symlink command (`seed`) and wire PATH export into the user shell rc idempotently.
+Why not require manual symlink setup: Manual setup is error-prone and slows the “idea -> folder -> scaffold” loop.
+
 ### 2026-02-11: Codified POC philosophy and upgrade triggers in the seed
 Context: Core rationale was partly implicit and could degrade across repeated scaffolds.
 Decision: Add explicit POC philosophy and upgrade-trigger sections to generated `CONTEXT.md` and `AGENTS.md`, and mirror them in upgrade-skill templates/mapping.
@@ -21,7 +31,7 @@ Context: We want a broadly recognized cross-agent instruction file as part of th
 Decision: Add minimal `AGENTS.md` to root repo and generated project seed, and include it in upgrade-skill canonical mappings/templates.
 Why not keep agent guidance implicit: Explicit repo-local guidance reduces ambiguity across different coding assistants.
 
-### 2026-02-10: Repositioned repo as POC scaffold kit
+### 2026-02-10: Repositioned repo as Seed
 Context: The prior workflow-centric starter no longer matched current POC needs.
 Decision: Make this repo CLI-first for greenfield scaffolding, with a separate skill for upgrading existing projects to prioritize POC speed over phase-level governance.
 Why not full spec framework now: POC iteration speed and low overhead are higher priority than phase-level governance.

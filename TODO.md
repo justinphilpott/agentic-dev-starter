@@ -21,7 +21,10 @@
 
 ## Done (recent)
 
-- ~~[ ] Reworked repo into a CLI-first POC scaffold kit~~
+- ~~[ ] Refactored README to skimmable `What/How/Why/Where/When` structure~~
+- ~~[ ] Added README prerequisites, usage examples, and top badges~~
+- ~~[ ] Added `scripts/install-cli.sh` to install global `seed` command~~
+- ~~[ ] Reworked repo into Seed (CLI-first POC scaffolding)~~
 - ~~[ ] Added `scripts/new-poc.sh` interactive generator~~
 - ~~[ ] Added `skills/poc-upgrade-existing` migration skill~~
 

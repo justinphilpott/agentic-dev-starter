@@ -1,9 +1,9 @@
 ---
 name: poc-upgrade-existing
-description: Upgrade an existing project to the lightweight POC scaffold standard by introducing README.md, DECISIONS.md, TODO.md, CONTEXT.md, AGENTS.md, scripts/setup.sh, and scripts/test.sh while preserving current docs, task history, and progress context. Use when asked to retrofit an existing repo to the POC kit or to normalize inconsistent POC project files.
+description: Upgrade an existing project to the lightweight POC scaffold standard by introducing README.md, DECISIONS.md, TODO.md, CONTEXT.md, AGENTS.md, scripts/setup.sh, and scripts/test.sh while preserving current docs, task history, and progress context. Use when asked to retrofit an existing repo to Seed or to normalize inconsistent POC project files.
 ---
 
-# Upgrade Existing Project To POC Kit
+# Upgrade Existing Project To Seed
 
 Follow this workflow exactly.
 

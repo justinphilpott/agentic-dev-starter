@@ -129,7 +129,7 @@ Why not <alternative>: (optional)
 
 ## History
 
-### $today: Initialized from POC scaffold kit
+### $today: Initialized from Seed
 Context: Need a lightweight structure to test an idea quickly.
 Decision: Use the seven-file baseline with executable setup/test scripts and AGENTS guidance to keep onboarding and iteration fast.
 Why not heavier process: Added process overhead is not justified at this stage.

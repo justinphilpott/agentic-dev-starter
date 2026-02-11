@@ -37,6 +37,7 @@ We need a repeatable way to start idea-validation projects quickly, with just en
 - `TODO.md`: active execution list and short backlog.
 - `AGENTS.md`: concise operating guidance for coding agents.
 - `scripts/new-poc.sh`: interactive scaffold generator for new empty directories.
+- `scripts/install-cli.sh`: global symlink installer for the `seed` command.
 - `skills/poc-upgrade-existing/SKILL.md`: migration workflow for existing projects.
 
 ## Non-Obvious Dependencies
