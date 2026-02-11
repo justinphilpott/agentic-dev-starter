@@ -1,0 +1,6 @@
+// For format details, see https://aka.ms/devcontainer.json.
+// Source template: https://github.com/devcontainers/templates/tree/main/src/go
+{
+  "name": "Seed (Go)",
+  "image": "mcr.microsoft.com/devcontainers/go:2-1.25-trixie"
+}

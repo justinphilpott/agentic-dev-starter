@@ -11,6 +11,16 @@ Why not <alternative>: (optional)
 
 ## History
 
+### 2026-02-11: Documented containerized test invocation with `GOFLAGS=-buildvcs=false`
+Context: Running `./scripts/seed-test.sh` inside Docker as root can fail Go VCS stamping on mounted repos.
+Decision: Document a container command that sets `GOFLAGS=-buildvcs=false` for reliable local validation.
+Why not require host Go only: The repo now supports dev-container-first workflows where host Go may be absent.
+
+### 2026-02-11: Added official Go dev container baseline
+Context: Local validation currently depends on host Go availability, and this environment does not always have Go installed.
+Decision: Add `.devcontainer/devcontainer.json` using the official Dev Containers Go image from `github.com/devcontainers/templates`.
+Why not custom Dockerfile: The official template image is maintained upstream and keeps setup minimal for POC speed.
+
 ### 2026-02-11: Clarified profile journeys and command contract in docs
 Context: Prior docs contained the right pieces but left room for ambiguity in command flow and profile choice outcomes.
 Decision: Make `seed [directory]` and profile semantics explicit, including a profile matrix, user journeys, and source-vs-generated boundary section in README.

@@ -22,6 +22,8 @@
 
 ## Done (recent)
 
+- ~~[ ] Documented containerized `seed-test` command for no-host-Go environments~~
+- ~~[ ] Added official Go dev container config (`.devcontainer/devcontainer.json`)~~
 - ~~[ ] Defined three fixed Seed profiles (`core`, `llm`, `guarded`)~~
 - ~~[ ] Added profile-aware manifest contract (`seed-contract/manifest.json`)~~
 - ~~[ ] Added Go CLI entrypoint with `seed [directory]` command shape~~

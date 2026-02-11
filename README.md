@@ -86,6 +86,21 @@ source ~/.zshrc
 
 If you use bash, source `~/.bashrc` instead.
 
+## Dev Container
+
+This repo includes a Go dev container definition from the official Dev Containers templates:
+
+- `.devcontainer/devcontainer.json`
+- Base image: `mcr.microsoft.com/devcontainers/go:2-1.25-trixie`
+
+Use this when your host machine does not already have Go installed.
+
+Quick check from this repo root:
+
+```sh
+docker run --rm -e GOFLAGS=-buildvcs=false -v "$PWD:/work" -w /work mcr.microsoft.com/devcontainers/go:2-1.25-trixie sh -lc './scripts/seed-test.sh'
+```
+
 ## Existing Repo Upgrade Skill
 
 For non-empty repos, use:
