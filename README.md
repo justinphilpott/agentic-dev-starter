@@ -3,7 +3,7 @@
 ![Status](https://img.shields.io/badge/status-active%20poc-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-Seed is a CLI + skill system for agentic development.
+Seed is a minimal CLI + skill system for agentic development.
 
 It gives you one path for new projects and one path for existing projects:
 
