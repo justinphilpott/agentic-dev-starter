@@ -1,38 +1,37 @@
-# Agentic Dev Starter
+# POC Scaffold Kit
 
-An minimal and experimental micro-framework for prompting Cline+Claude (or similar) to create custom workflows.
+CLI-first scaffolding for fast proof-of-concept repositories.
 
-## Purpose
+## Quick Start
 
-This micro-framework provides a set of workflow definitions that each comprise the following:
+```sh
+./scripts/setup.sh
+./scripts/new-poc.sh ../my-new-poc
+./scripts/test.sh
+```
 
-- A prompt, to be supplied as the "custom instructions" for the agentic extension in use (for example Cline)
-- A set of supporting files that are intended to help the LLM to maintain state and direction between sessions, and to augment and provide context for general agentic functionality.
+## Current Status
 
-A workflow can be very simple, for example the "context-history-commit" workflow (see below), or potentially more complex involving [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) tools to create some very useful agentic flows.
+Ready for internal use across new POCs, with a documented skill for upgrading existing repos.
 
-This is an experimental WIP, please test and use accordingly.
+## Known Limitations
 
-## Workflows
+- The scaffold command is interactive only (flags mode is not implemented yet).
+- Upgrade flow for existing repos is skill-guided
+- Generated setup/test command prompts are single-line inputs.
 
-### 1. "context-history-commit"
+## Questions / Issues
 
-Named to indicate the basic flow of: read context and history, perform user directed tasks, update the history, commit and finish.
+All welcome!
 
-See the [workflow README](workflows/context-history-commit/README.md) for detailed instructions.
+## POC Success Criteria
 
-Key files:
-- **DEVLOG.md**: LLM authored: Tracks development progress and changes between sessions. The LLM updates this file after each task (prior to commit) to maintain a more detailed (if necessary) history than a commit log. This helps retain reasoning chains and associated conclusions and decisions where necessary.
-- **CONTEXT.md**: HUMAN authored: Provides high-level project-specific context, goals, constraints and requirements to guide development, this should change rarely.
-- **prompt.md**: The prompt to be supplied to the custom instructions in your agentic extension.
+- Create a new POC baseline in under two minutes from an empty directory.
+- Ensure generated repos contain the seven-file baseline with executable setup/test scripts.
+- Preserve context, tasks, and decisions when normalizing existing repos via skill workflow.
 
-## Requirements
+## Additional Notes
 
-- Git
-- VSCode or similar dev environment that supports chat-based coding agents
-- An agentic coding assistant that allows custom prompts in settings, for example Cline
-- An API key for Claude, Deepseek or whatever model you like to work with.
-
-## Contrib
-
-Feedback, ideas, and pull requests are welcome.
+- If a POC graduates into a phased project, move to heavier specification frameworks (for example OpenSpec/Spec Kit).
+- Treat this kit as the lowest sustainable process level; avoid artifacts you would not keep updated under fatigue.
+- Existing-project retrofit instructions live in `skills/poc-upgrade-existing/SKILL.md`.
