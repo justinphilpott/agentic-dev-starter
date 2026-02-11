@@ -1,8 +1,31 @@
-# Mapping Rules
+# Seed File Mapping Rules
 
-Use this mapping to preserve existing context while normalizing to the seven canonical files.
+Use this mapping to preserve existing context while normalizing to the selected Seed profile.
 
-## Canonical: README.md
+## Profile Artifact Sets
+
+## core
+
+- `README.md`
+- `DECISIONS.md`
+- `TODO.md`
+- `CONTEXT.md`
+- `AGENTS.md`
+
+## llm
+
+- all `core` artifacts
+- `.seed/manifest.json`
+- `skills/seed-validate/SKILL.md`
+
+## guarded
+
+- all `llm` artifacts
+- `.seed/seed-test.sh`
+- `.seed/install-hooks.sh`
+- `.seed/hooks/pre-commit`
+
+## Seed File: README.md
 
 Preferred source candidates:
 
@@ -18,7 +41,7 @@ Preserve and place:
 - Known limitations
 - Support path (person/channel)
 
-## Canonical: DECISIONS.md
+## Seed File: DECISIONS.md
 
 Preferred source candidates:
 
@@ -36,7 +59,7 @@ Preserve and place:
 - Rejected alternative + reason (when useful)
 - Any critical caveat inline when non-obvious
 
-## Canonical: TODO.md
+## Seed File: TODO.md
 
 Preferred source candidates:
 
@@ -55,7 +78,7 @@ Preserve and place:
 - Recent completed tasks (keep around five)
 - Any blockers near the top
 
-## Canonical: CONTEXT.md
+## Seed File: CONTEXT.md
 
 Preferred source candidates:
 
@@ -76,7 +99,7 @@ Preserve and place:
 - Non-obvious dependency reasons
 - LLM-specific caveats and invariants
 
-## Canonical: AGENTS.md
+## Seed File: AGENTS.md
 
 Preferred source candidates:
 
@@ -95,33 +118,49 @@ Preserve and place:
 - POC guardrails that prevent over-specification
 - Upgrade triggers for moving beyond POC mode
 
-## Canonical: scripts/setup.sh
+## Seed Artifact: .seed/manifest.json (`llm`, `guarded`)
 
-Discover commands from:
+Create or normalize:
 
-- README quick start sections
-- `Makefile` targets
-- package manager scripts
-- setup/bootstrap scripts already present
+- Copy from canonical Seed source (`seed-contract/manifest.json`) as a profile snapshot
+- Keep `active_profile` accurate
+- Keep heading aliases and warning policy aligned with canonical profile rules
 
-Rules:
+## Seed Artifact: skills/seed-validate/SKILL.md (`llm`, `guarded`)
 
-- Keep only commands needed from clone to runnable state.
-- Keep comments concise and factual.
-- Prefer deterministic commands over manual instructions.
+Create or normalize:
 
-## Canonical: scripts/test.sh
+- Analyze + suggest fixes (default)
+- Report likely misplaced Seed content in non-Seed files
+- Do not auto-edit unless explicitly requested
 
-Discover commands from:
+## Seed Artifact: .seed/seed-test.sh (`guarded`)
 
-- Existing test scripts/Make targets
-- package manager test commands
-- smoke-check commands in docs
+Create or normalize:
 
-Rules:
+- Use `#!/usr/bin/env sh` and `set -eu`
+- Read checks from `.seed/manifest.json`
+- Emit contract output lines:
+  - `SEED_STATUS`
+  - `SEED_ERRORS`
+  - `SEED_WARNINGS`
+  - `SEED_TRIGGER_REASONS`
+- Exit with `0` (ok), `1` (fail), `2` (skill recommended)
 
-- Keep smoke-test scope lightweight.
-- Ensure the script is executable and starts with `set -eu`.
+## Seed Artifact: .seed/hooks/pre-commit (`guarded`)
+
+Create or normalize:
+
+- Run `./.seed/seed-test.sh`
+- Block commit on exit `1`
+- Allow commit on exit `2` and print `seed-validate` next action
+
+## Seed Artifact: .seed/install-hooks.sh (`guarded`)
+
+Create or normalize:
+
+- Set `git config core.hooksPath .seed/hooks`
+- Verify hook files exist and are executable
 
 ## Merge Policy
 

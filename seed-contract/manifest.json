@@ -1,0 +1,148 @@
+{
+  "seed_format_version": "2.0.0",
+  "default_profile": "llm",
+  "profile_order": [
+    "core",
+    "llm",
+    "guarded"
+  ],
+  "profiles": {
+    "core": {
+      "description": "Core markdown files only; no local Seed validation assets.",
+      "validation_mode": "none",
+      "warnings_as_errors": false,
+      "required_files": [
+        "README.md",
+        "DECISIONS.md",
+        "TODO.md",
+        "CONTEXT.md",
+        "AGENTS.md"
+      ],
+      "required_headings": [
+        "README.md::Quick Start",
+        "README.md::Current Status",
+        "README.md::Known Limitations",
+        "README.md::Questions / Issues",
+        "README.md::POC Success Criteria",
+        "CONTEXT.md::POC Success Criteria",
+        "CONTEXT.md::POC Philosophy",
+        "CONTEXT.md::Upgrade Triggers",
+        "CONTEXT.md::Key Files",
+        "AGENTS.md::Working Rules",
+        "AGENTS.md::POC Guardrails",
+        "AGENTS.md::Upgrade Triggers"
+      ],
+      "heading_aliases": [
+        "README.md::Quick Start::Getting Started",
+        "README.md::Questions / Issues::Support",
+        "README.md::POC Success Criteria::Success Criteria",
+        "CONTEXT.md::POC Success Criteria::Success Criteria",
+        "CONTEXT.md::POC Philosophy::Working Philosophy",
+        "AGENTS.md::POC Guardrails::Guardrails"
+      ],
+      "misplaced_content_signals": [
+        "Quick Start",
+        "Current Status",
+        "Known Limitations",
+        "POC Success Criteria",
+        "POC Philosophy",
+        "POC Guardrails",
+        "Upgrade Triggers"
+      ]
+    },
+    "llm": {
+      "description": "Core docs plus a local manifest and seed-validate skill for low-friction agentic checks.",
+      "validation_mode": "skill",
+      "warnings_as_errors": false,
+      "required_files": [
+        "README.md",
+        "DECISIONS.md",
+        "TODO.md",
+        "CONTEXT.md",
+        "AGENTS.md",
+        ".seed/manifest.json",
+        "skills/seed-validate/SKILL.md"
+      ],
+      "required_headings": [
+        "README.md::Quick Start",
+        "README.md::Current Status",
+        "README.md::Known Limitations",
+        "README.md::Questions / Issues",
+        "README.md::POC Success Criteria",
+        "CONTEXT.md::POC Success Criteria",
+        "CONTEXT.md::POC Philosophy",
+        "CONTEXT.md::Upgrade Triggers",
+        "CONTEXT.md::Key Files",
+        "AGENTS.md::Working Rules",
+        "AGENTS.md::POC Guardrails",
+        "AGENTS.md::Upgrade Triggers"
+      ],
+      "heading_aliases": [
+        "README.md::Quick Start::Getting Started",
+        "README.md::Questions / Issues::Support",
+        "README.md::POC Success Criteria::Success Criteria",
+        "CONTEXT.md::POC Success Criteria::Success Criteria",
+        "CONTEXT.md::POC Philosophy::Working Philosophy",
+        "AGENTS.md::POC Guardrails::Guardrails"
+      ],
+      "misplaced_content_signals": [
+        "Quick Start",
+        "Current Status",
+        "Known Limitations",
+        "POC Success Criteria",
+        "POC Philosophy",
+        "POC Guardrails",
+        "Upgrade Triggers"
+      ]
+    },
+    "guarded": {
+      "description": "LLM profile plus shell validation and pre-commit hooks.",
+      "validation_mode": "script_and_hooks",
+      "validation_entrypoint": "./.seed/seed-test.sh",
+      "warnings_as_errors": false,
+      "required_files": [
+        "README.md",
+        "DECISIONS.md",
+        "TODO.md",
+        "CONTEXT.md",
+        "AGENTS.md",
+        ".seed/manifest.json",
+        ".seed/seed-test.sh",
+        ".seed/install-hooks.sh",
+        ".seed/hooks/pre-commit",
+        "skills/seed-validate/SKILL.md"
+      ],
+      "required_headings": [
+        "README.md::Quick Start",
+        "README.md::Current Status",
+        "README.md::Known Limitations",
+        "README.md::Questions / Issues",
+        "README.md::POC Success Criteria",
+        "CONTEXT.md::POC Success Criteria",
+        "CONTEXT.md::POC Philosophy",
+        "CONTEXT.md::Upgrade Triggers",
+        "CONTEXT.md::Key Files",
+        "AGENTS.md::Working Rules",
+        "AGENTS.md::POC Guardrails",
+        "AGENTS.md::Upgrade Triggers"
+      ],
+      "heading_aliases": [
+        "README.md::Quick Start::Getting Started",
+        "README.md::Questions / Issues::Support",
+        "README.md::POC Success Criteria::Success Criteria",
+        "CONTEXT.md::POC Success Criteria::Success Criteria",
+        "CONTEXT.md::POC Philosophy::Working Philosophy",
+        "AGENTS.md::POC Guardrails::Guardrails"
+      ],
+      "misplaced_content_signals": [
+        "Quick Start",
+        "Current Status",
+        "Known Limitations",
+        "POC Success Criteria",
+        "POC Philosophy",
+        "POC Guardrails",
+        "Upgrade Triggers"
+      ]
+    }
+  }
+}

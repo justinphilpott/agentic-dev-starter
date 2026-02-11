@@ -2,51 +2,58 @@
 
 ## Problem Statement
 
-We need a repeatable way to start idea-validation projects quickly, with just enough structure to preserve clarity and continuity without introducing heavyweight planning overhead.
+We need a repeatable way to start idea-validation projects quickly, with enough structure to preserve clarity and continuity without heavyweight planning overhead.
 
 ## Constraints
 
 - Timeline: optimize for rapid POC setup and iteration.
 - Budget: minimal tooling/runtime assumptions.
-- Must work with: mixed local environments where shell scripts are the safest common denominator.
+- Must work with: mixed local environments where shell and git are common, and Go binary distribution is straightforward.
 
 ## POC Success Criteria
 
-- New projects are scaffolded from an empty directory in a single guided command.
-- Every scaffold contains the seven canonical files used for setup, status, context, decisions, tasks, and agent guidance.
-- Existing projects can be normalized to the same structure while preserving useful history.
+- New projects can be scaffolded with `seed <directory>` and profile selection.
+- Existing projects can be normalized to selected profile contracts (`core`, `llm`, `guarded`).
+- Seeded repos remain self-contained, with no runtime dependency on source repo paths.
+- Validation paths are profile-appropriate and low-friction by default.
 
 ## POC Philosophy
 
 - Keep only artifacts that stay accurate under fast iteration.
 - If a file is unlikely to be maintained when tired, simplify or remove it.
 - Optimize for validated learning speed, not process completeness.
-- Avoid premature contracts/diagrams/roadmaps unless complexity requires them.
-- Use scripts as executable documentation for setup and smoke validation.
+- Avoid premature contracts, diagrams, and roadmaps unless complexity requires them.
 
 ## Upgrade Triggers
 
-- Move to OpenSpec/Spec Kit when the POC becomes a phased project with explicit milestones/handoffs.
+- Move to OpenSpec/Spec Kit when the POC becomes a phased project with explicit milestones and handoffs.
 - Move to OpenSpec/Spec Kit when multiple contributors need stronger contracts and review workflows.
 - Move to OpenSpec/Spec Kit when production commitments require heavier planning and governance.
 
 ## Key Files
 
-- `README.md`: canonical quick start, status, limits, support path, and success criteria.
-- `DECISIONS.md`: non-obvious decisions and rationale.
-- `TODO.md`: active execution list and short backlog.
-- `AGENTS.md`: concise operating guidance for coding agents.
-- `scripts/new-poc.sh`: interactive scaffold generator for new empty directories.
-- `scripts/install-cli.sh`: global symlink installer for the `seed` command.
-- `skills/poc-upgrade-existing/SKILL.md`: migration workflow for existing projects.
+- `cmd/seed/main.go`: Go CLI entrypoint and scaffold generation logic.
+- `seed-contract/manifest.json`: canonical profile-aware Seed contract rules.
+- `scripts/seed.sh`: compatibility wrapper that runs Go CLI from source checkout.
+- `scripts/install-seed-cli.sh`: builds and installs global `seed` binary.
+- `scripts/seed-test.sh`: source-level smoke tests across all profiles.
+- `skills/seed-upgrade-existing/SKILL.md`: profile-aware migration workflow for existing repos.
+- `skills/seed-upgrade-existing/scripts/validate-seed-layout.sh`: profile-aware artifact validator.
+- `skills/seed-validate/SKILL.md`: nuanced drift analysis workflow for seeded repos.
+
+## Source vs Generated Boundary
+
+- Source repo `.seed/` is not a development surface.
+- `.seed/` artifacts belong to seeded output repos only.
+- Source repo should evolve canonical generators/templates, not hand-edited generated output.
 
 ## Non-Obvious Dependencies
 
-- No external runtime dependency is required for core scaffolding besides POSIX shell utilities.
+- Go toolchain is required to build/run the CLI from source.
+- Git is required for guarded profile hook setup.
 
 ## For LLM Agents
 
-- Preserve canonical section headers in root docs unless explicitly asked to change structure.
-- When upgrading existing repos, merge and relocate useful context instead of overwriting it.
-- Keep `DECISIONS.md` and `TODO.md` current in the same change where behavior is updated.
-- Keep smoke tests lightweight; prioritize fast confidence over exhaustive test architecture at POC stage.
+- Use `seed-contract/manifest.json` as contract source of truth.
+- Preserve profile semantics (`core`, `llm`, `guarded`) when editing code/docs/skills.
+- Keep `DECISIONS.md` and `TODO.md` updated in the same change for non-obvious behavior updates.

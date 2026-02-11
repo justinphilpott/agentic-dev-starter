@@ -3,9 +3,9 @@ set -eu
 
 usage() {
   cat <<'USAGE'
-Usage: scripts/install-cli.sh [--name <command-name>] [--bin-dir <bin-dir>] [--shell-rc <rc-file>]
+Usage: scripts/install-seed-cli.sh [--name <command-name>] [--bin-dir <bin-dir>] [--shell-rc <rc-file>]
 
-Install a global command that points to scripts/new-poc.sh.
+Build and install the Seed CLI binary globally.
 
 Defaults:
   --name seed
@@ -50,10 +50,12 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-target_script="$script_dir/new-poc.sh"
+if ! command -v go >/dev/null 2>&1; then
+  die "Go is required to build Seed CLI. Install Go and re-run this script."
+fi
 
-[ -x "$target_script" ] || die "Expected executable target script at $target_script"
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+repo_root=$(CDPATH= cd -- "$script_dir/.." && pwd)
 
 if [ -z "$shell_rc" ]; then
   case "${SHELL:-}" in
@@ -64,7 +66,10 @@ if [ -z "$shell_rc" ]; then
 fi
 
 mkdir -p "$bin_dir"
-ln -sf "$target_script" "$bin_dir/$command_name"
+(
+  cd "$repo_root"
+  go build -o "$bin_dir/$command_name" ./cmd/seed
+)
 
 path_export_line="export PATH=\"$bin_dir:\$PATH\""
 if [ "$bin_dir" = "${HOME}/.local/bin" ]; then
@@ -75,19 +80,20 @@ touch "$shell_rc"
 if ! grep -Fq "$path_export_line" "$shell_rc"; then
   {
     printf '\n'
-    printf '# Added by POC scaffold CLI installer\n'
+    printf '# Added by Seed CLI installer\n'
     printf '%s\n' "$path_export_line"
   } >> "$shell_rc"
 fi
 
-cat <<EOF
+cat <<EOF2
 Installed command:
-  $command_name -> $target_script
+  $command_name -> $bin_dir/$command_name
 
 Shell config updated:
   $shell_rc
 
 Next:
   1) Reload your shell: source $shell_rc
-  2) In an empty project directory, run: $command_name .
-EOF
+  2) In a new or empty project directory, run: $command_name <directory>
+  3) Omit --profile to use the interactive 3-option TUI
+EOF2
