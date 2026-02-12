@@ -1,0 +1,37 @@
+# Agent Context for {{.ProjectName}}
+
+**Last Updated**: {{.Date}}
+
+## Quick Navigation
+
+- **[README.md](README.md)** - Understand user-facing purpose and usage
+- **[DECISIONS.md](DECISIONS.md)** - Architectural choices and rationale{{if .IncludeLearnings}}
+- **[LEARNINGS.md](LEARNINGS.md)** - Validated discoveries{{end}}
+- **[TODO.md](TODO.md)** - Active work
+
+## Project Overview
+
+{{.Description}}
+{{if ne .TechStack "unknown"}}
+
+**Tech Stack**: {{.TechStack}}
+{{end}}
+
+## Key Constraints
+
+[Define critical constraints agents must respect]
+- Keep changes focused and minimal during POC phase
+- Document non-obvious decisions in [DECISIONS.md](DECISIONS.md){{if .IncludeLearnings}}
+- Record validated discoveries in [LEARNINGS.md](LEARNINGS.md){{end}}
+
+## Working Guidelines
+
+**Before making changes:**
+1. Check [TODO.md](TODO.md) for related active work
+2. Review [DECISIONS.md](DECISIONS.md) for relevant context
+
+**When making changes:**
+- Update [TODO.md](TODO.md) if adding multi-step work
+- Document non-obvious choices in [DECISIONS.md](DECISIONS.md)
+
+[Add project-specific patterns and key files as they emerge]

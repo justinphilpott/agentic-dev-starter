@@ -1,0 +1,37 @@
+# Architectural Decisions
+
+## Format
+
+Each decision follows this structure:
+
+- **Decision**: [Brief title]
+- **Date**: [YYYY-MM-DD]
+- **Status**: [Active | Superseded | Experimental]
+- **Context**: [What forces led to this decision?]
+- **Decision**: [What did we decide?]
+- **Consequences**: [Tradeoffs, benefits, costs]
+- **Alternatives Considered**: [What else was evaluated?]
+
+---
+
+## Decisions
+
+### EXAMPLE - DELETE AFTER FIRST REAL DECISION
+
+**Decision**: Document architectural choices in structured format
+**Date**: {{.Date}}
+**Status**: Active
+**Context**: During rapid POC development, the rationale behind decisions is easily forgotten. Future contributors (including LLM agents) need context to avoid revisiting settled questions.
+**Decision**: Use this DECISIONS.md file to document all non-obvious architectural choices with context, consequences, and alternatives considered.
+**Consequences**:
+- ✅ Clear record of "why" behind architecture
+- ✅ Helps agents understand constraints before making changes
+- ⚠️ Requires discipline to update when making significant decisions
+**Alternatives Considered**:
+- Code comments only (too scattered, hard to find)
+- Wiki/external docs (disconnected from code, easy to forget){{if .IncludeLearnings}}
+**Related Learning**: See [LEARNINGS.md](LEARNINGS.md) > Documentation Patterns{{end}}
+
+---
+
+[Add your decisions here - newest first]
