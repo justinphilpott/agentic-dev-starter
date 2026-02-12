@@ -2,31 +2,14 @@
 
 {{.Description}}
 
-## What & Why
-
-**What**: [Describe what {{.ProjectName}} is]
-
-**Why**: [What problem does this solve?]
-
 ## Quick Start
 
-{{if ne .TechStack "unknown"}}
-**Tech Stack**: {{.TechStack}}
+[Add installation and usage instructions as they emerge]
 
-{{end}}
-### Installation
-[Installation steps]
+---
 
-### Usage
-[Basic usage examples]
-
-## Documentation
-{{if ne .Author ""}}
-
-Maintained by {{.Author}}.
-{{end}}
-
-- **[AGENTS.md](AGENTS.md)** - Agent/LLM working context
-- **[DECISIONS.md](DECISIONS.md)** - Architectural decisions{{if .IncludeLearnings}}
-- **[LEARNINGS.md](LEARNINGS.md)** - Validated discoveries{{end}}
-- **[TODO.md](TODO.md)** - Active tasks
+**Project Files**:
+- [TODO.md](TODO.md) - Active work
+- [AGENTS.md](AGENTS.md) - Agent context
+- [DECISIONS.md](DECISIONS.md) - Key decisions{{if .IncludeLearnings}}
+- [LEARNINGS.md](LEARNINGS.md) - Validated discoveries{{end}}
