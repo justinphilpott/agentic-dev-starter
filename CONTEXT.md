@@ -32,13 +32,12 @@ We need a repeatable way to start idea-validation projects quickly, with enough 
 
 ## Key Files
 
-- `cmd/seed/main.go`: Go CLI entrypoint and scaffold generation logic.
+- `cmd/seed/*.go`: Go CLI commands, generation logic, and embedded guarded runtime assets.
 - `seed-contract/manifest.json`: canonical profile-aware Seed contract rules.
-- `scripts/seed.sh`: compatibility wrapper that runs Go CLI from source checkout.
-- `scripts/install-seed-cli.sh`: builds and installs global `seed` binary.
-- `scripts/seed-test.sh`: source-level smoke tests across all profiles.
+- `seed install`: installs global `seed` command from the current binary.
+- `go test ./cmd/seed`: source-level smoke tests across all profiles.
+- `seed validate-layout`: profile-aware artifact validator for upgraded existing repos.
 - `skills/seed-upgrade-existing/SKILL.md`: profile-aware migration workflow for existing repos.
-- `skills/seed-upgrade-existing/scripts/validate-seed-layout.sh`: profile-aware artifact validator.
 - `skills/seed-validate/SKILL.md`: nuanced drift analysis workflow for seeded repos.
 
 ## Source vs Generated Boundary

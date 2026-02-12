@@ -16,15 +16,15 @@
 - Keep edits small and focused on the requested task.
 - Update `TODO.md` when task state changes.
 - Update `DECISIONS.md` for non-obvious decisions.
-- Run `./scripts/seed-test.sh` before concluding meaningful changes.
+- Run `go test ./cmd/seed` before concluding meaningful changes.
 - Use profile-aware validation for upgrades:
-  - `skills/seed-upgrade-existing/scripts/validate-seed-layout.sh . --profile <core|llm|guarded>`
+  - `go run ./cmd/seed validate-layout . --profile <core|llm|guarded>`
 
 ## Source Boundary
 
 - In this source repo, `.seed/` is generated output and not a development surface.
 - Develop against canonical sources only:
-  - `cmd/seed/main.go`
+  - `cmd/seed/*.go`
   - `seed-contract/manifest.json`
   - `skills/seed-upgrade-existing/*`
   - `skills/seed-validate/SKILL.md`

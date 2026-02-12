@@ -22,6 +22,9 @@
 
 ## Done (recent)
 
+- ~~[ ] Replaced upgrade layout validator shell script with `seed validate-layout`~~
+- ~~[ ] Split monolithic CLI file into focused command/render files~~
+- ~~[ ] Replaced root `scripts/` workflows with `seed install` and `go test ./cmd/seed`~~
 - ~~[ ] Documented containerized `seed-test` command for no-host-Go environments~~
 - ~~[ ] Added official Go dev container config (`.devcontainer/devcontainer.json`)~~
 - ~~[ ] Defined three fixed Seed profiles (`core`, `llm`, `guarded`)~~

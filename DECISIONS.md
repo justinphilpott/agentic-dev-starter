@@ -11,6 +11,26 @@ Why not <alternative>: (optional)
 
 ## History
 
+### 2026-02-11: Replaced upgrade validator shell script with CLI subcommand
+Context: Source-repo upgrade validation still depended on `skills/seed-upgrade-existing/scripts/validate-seed-layout.sh` after root scripts were retired.
+Decision: Add `seed validate-layout` and remove the remaining source-repo shell validator script.
+Why not keep both: Duplicate validation entrypoints create drift and violate the one-binary POC direction.
+
+### 2026-02-11: Keep shell only in guarded generated runtime artifacts
+Context: The source repo can avoid shell, but guarded seeded repos still need commit hook entrypoints that run without requiring Seed installation.
+Decision: Keep guarded `.seed/*.sh` artifacts as generated runtime contracts while removing shell scripts from source-repo workflows.
+Why not remove shell from guarded output now: Git hook entrypoints and self-contained seeded repos still need an executable script surface.
+
+### 2026-02-11: Move source smoke checks to Go tests instead of runtime command
+Context: The `seed source-test` command expanded runtime code size and mixed contributor test harness logic into the shipped CLI path.
+Decision: Replace runtime source-smoke command with `go test ./cmd/seed`, and keep runtime CLI focused on scaffold/install/validate flows.
+Why not keep `seed source-test`: It bloats product command surface for maintainer-only behavior.
+
+### 2026-02-11: Retired root scripts directory in favor of CLI subcommands
+Context: Root-level shell helpers (`scripts/seed.sh`, `scripts/install-seed-cli.sh`, `scripts/seed-test.sh`) duplicated product behavior and blocked the goal of a single operational binary.
+Decision: Move installer flow into `seed install`, move source-smoke flow into `go test ./cmd/seed`, then retire root `scripts/`.
+Why not keep wrappers for compatibility: This POC has no downstream consumers yet, so removing duplicate surfaces now is lower-risk than carrying two interfaces.
+
 ### 2026-02-11: Documented containerized test invocation with `GOFLAGS=-buildvcs=false`
 Context: Running `./scripts/seed-test.sh` inside Docker as root can fail Go VCS stamping on mounted repos.
 Decision: Document a container command that sets `GOFLAGS=-buildvcs=false` for reliable local validation.

@@ -33,6 +33,13 @@ Rules:
 - TUI default selection is `llm`.
 - In non-interactive mode, omitted `--profile` defaults to `llm`.
 
+Maintenance commands:
+
+```sh
+go test ./cmd/seed
+go run ./cmd/seed validate-layout . --profile llm
+```
+
 ## Profiles
 
 | Profile | Purpose | Artifacts |
@@ -80,11 +87,17 @@ Guarded setup behavior:
 From this repo root:
 
 ```sh
-./scripts/install-seed-cli.sh
+go run ./cmd/seed install
 source ~/.zshrc
 ```
 
 If you use bash, source `~/.bashrc` instead.
+
+Install command flags:
+
+```sh
+go run ./cmd/seed install --name seed --bin-dir ~/.local/bin --shell-rc ~/.zshrc
+```
 
 ## Dev Container
 
@@ -98,7 +111,7 @@ Use this when your host machine does not already have Go installed.
 Quick check from this repo root:
 
 ```sh
-docker run --rm -e GOFLAGS=-buildvcs=false -v "$PWD:/work" -w /work mcr.microsoft.com/devcontainers/go:2-1.25-trixie sh -lc './scripts/seed-test.sh'
+docker run --rm -e GOFLAGS=-buildvcs=false -v "$PWD:/work" -w /work mcr.microsoft.com/devcontainers/go:2-1.25-trixie sh -lc 'go test ./cmd/seed'
 ```
 
 ## Existing Repo Upgrade Skill
@@ -110,7 +123,7 @@ For non-empty repos, use:
 Run profile-aware validation after upgrade:
 
 ```sh
-skills/seed-upgrade-existing/scripts/validate-seed-layout.sh . --profile llm
+go run ./cmd/seed validate-layout . --profile llm
 ```
 
 Change `llm` to `core` or `guarded` as needed.
@@ -130,17 +143,17 @@ Important boundary:
 
 Canonical generation sources in this repo:
 
-- `cmd/seed/main.go`
+- `cmd/seed/*.go`
 - `seed-contract/manifest.json`
 - `skills/seed-upgrade-existing/*`
 - `skills/seed-validate/SKILL.md`
 
 ## Migration Note
 
-If you were using the previous shell-native scaffold flow:
+If you were using previous root-level shell helpers:
 
-- `scripts/seed.sh` is now a compatibility wrapper around the Go CLI.
-- `scripts/install-seed-cli.sh` now builds a binary instead of symlinking shell scripts.
+- `seed install` replaces root installer scripts.
+- `go test ./cmd/seed` replaces root source smoke-test scripts.
 - Profile selection now controls generated artifact scope (`core`, `llm`, `guarded`).
 
 ## Status

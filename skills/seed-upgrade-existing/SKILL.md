@@ -45,8 +45,8 @@ Follow this workflow exactly.
 ## 6) Validate
 
 - Confirm required Seed artifacts exist for the selected profile.
-- Run bundled validator script:
-  - `skills/seed-upgrade-existing/scripts/validate-seed-layout.sh . --profile <core|llm|guarded>`
+- Run profile-aware validator:
+  - `go run ./cmd/seed validate-layout . --profile <core|llm|guarded>`
 - For `guarded`, run `.seed/seed-test.sh` and interpret status contract.
 - If `SEED_STATUS=skill_recommended`, run `skills/seed-validate/SKILL.md` workflow.
 - Report unresolved gaps clearly.
