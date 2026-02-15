@@ -36,9 +36,8 @@ var (
 	errorStyle   = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("1"))   // red
 )
 
-// Version of the seed tool
-// Update this when releasing new versions
-const Version = "0.1.0"
+// Version is set at build time via ldflags. Falls back to "dev" for local builds.
+var Version = "dev"
 
 func main() {
 	// Run main logic and exit with appropriate code

@@ -22,9 +22,8 @@
   - Generated programmatically via encoding/json (not text/template) for reliable JSON output
 
 ### 📋 Next Up
-- Build binary and validate end-to-end flow
-- Optionally add Lip Gloss for styled output
 - Future: upgrade/brownfield support (via skill)
+- Future: `seed init` for existing projects
 
 ## Template Files (templates/)
 
@@ -47,7 +46,7 @@
 - `IncludeLearnings` - Boolean, whether to create LEARNINGS.md (default: false)
 - `IncludeDevContainer` - Boolean, whether to scaffold .devcontainer/ (default: false)
 - `DevContainerImage` - MCR image tag, e.g. "go:2-1.25-trixie" (only if devcontainer opted in)
-- `AIChatTools` - List of AI tools for chat continuity, e.g. ["claude", "codex"] (only if devcontainer opted in)
+- `AIChatContinuity` - Boolean, whether to enable AI chat continuity (only if devcontainer opted in)
 
 **Auto-generated**:
 - `Date` - Current date (YYYY-MM-DD)
@@ -82,7 +81,10 @@ seed/                          ← seed tool source
 ├── main.go
 ├── wizard.go
 ├── scaffold.go
+├── scaffold_test.go
 ├── go.mod
+├── Makefile
+├── .github/workflows/release.yml
 └── CONTEXT.md (this file)
 
 Scaffolded output (example):   ← what seed creates for users
@@ -100,8 +102,8 @@ Scaffolded output (example):   ← what seed creates for users
 
 **Implementation**: Charm's Huh library (form/wizard) with 3 form groups:
 1. **Core info**: ProjectName (Input), Description (Text), IncludeLearnings (Confirm)
-2. **Dev container opt-in**: IncludeDevContainer (Confirm)
-3. **Dev container details** (conditional, hidden unless opted in): DevContainerImage (Select), AIChatTools (MultiSelect)
+2. **Options**: InitGit (Confirm), IncludeDevContainer (Confirm)
+3. **Dev container details** (conditional, hidden unless opted in): DevContainerImage (Select), AIChatContinuity (Confirm)
 
 **Devcontainer generation**: Uses `encoding/json` programmatically (not text/template) because:
 - JSON with conditional fields is fragile in text/template (trailing commas, escaping)
@@ -112,7 +114,18 @@ Scaffolded output (example):   ← what seed creates for users
 
 - `go mod tidy` - Update dependencies
 - `go run .` - Run seed CLI
-- `go build` - Build binary
+- `make build` - Build binary with version injection
+- `make test` - Run tests
+- `go test -count=1 ./...` - Run tests (without make)
+
+## Releasing
+
+Push a git tag to trigger automatic binary builds via GitHub Actions:
+```
+git tag v0.1.0
+git push origin v0.1.0
+```
+Builds for linux/darwin (amd64/arm64) and windows (amd64) are published as GitHub Releases.
 
 ## Branch
 
