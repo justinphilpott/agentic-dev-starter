@@ -2,5 +2,13 @@
 // Source template: https://github.com/devcontainers/templates/tree/main/src/go
 {
   "name": "Seed (Go)",
-  "image": "mcr.microsoft.com/devcontainers/go:2-1.25-trixie"
+  "image": "mcr.microsoft.com/devcontainers/go:2-1.25-trixie",
+
+  // Mount host Claude storage to preserve conversations across host/container contexts
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached"
+  ],
+
+  // Symlink host project path so Claude Code finds host conversations in the container
+  "postCreateCommand": "ln -sfn /home/vscode/.claude/projects/-home-justin-pro-seed /home/vscode/.claude/projects/-workspaces-seed"
 }

@@ -4,21 +4,27 @@
 
 **Seed** is a Go CLI tool for rapid agentic POC scaffolding. Users run `seed <directory>` to create a new project with minimal, agent-friendly documentation.
 
-## Current State (2026-02-12)
+## Current State (2026-02-15)
 
 ### ✅ Completed
 - **Ultra-minimal templates** (81 lines total across 5 files)
 - Templates stored in `templates/` directory
-- Ready for `embed.FS` bundling
-
-### 🚧 In Progress
-- TUI wizard for collecting user input
+- **Go CLI implementation** (3 files, ~500 lines with extensive comments)
+  - `main.go` - CLI entry point and orchestration
+  - `wizard.go` - Huh-based TUI wizard with validation
+  - `scaffold.go` - Template rendering engine with embed.FS + programmatic devcontainer generation
+- Template embedding via `go:embed`
+- Input validation (sensible bounds)
+- Directory safety checks (prevents overwrites)
+- **Devcontainer scaffolding** — optional .devcontainer/ generation with:
+  - Official MCR base image selection (Go, Node, Python, Rust, Java, .NET, C++, Universal)
+  - AI chat continuity for Claude Code and/or Codex (bind mounts + dynamic symlink setup)
+  - Generated programmatically via encoding/json (not text/template) for reliable JSON output
 
 ### 📋 Next Up
-- Wire up TUI wizard
-- Embed templates in Go binary
-- Template rendering logic
-- CLI command structure
+- Build binary and validate end-to-end flow
+- Optionally add Lip Gloss for styled output
+- Future: upgrade/brownfield support (via skill)
 
 ## Template Files (templates/)
 
@@ -39,6 +45,9 @@
 
 **Optional**:
 - `IncludeLearnings` - Boolean, whether to create LEARNINGS.md (default: false)
+- `IncludeDevContainer` - Boolean, whether to scaffold .devcontainer/ (default: false)
+- `DevContainerImage` - MCR image tag, e.g. "go:2-1.25-trixie" (only if devcontainer opted in)
+- `AIChatTools` - List of AI tools for chat continuity, e.g. ["claude", "codex"] (only if devcontainer opted in)
 
 **Auto-generated**:
 - `Date` - Current date (YYYY-MM-DD)
@@ -61,7 +70,7 @@ Single concrete task: "Define what success looks like for this POC"
 ## File Structure
 
 ```
-seed/
+seed/                          ← seed tool source
 ├── templates/
 │   ├── README.md.tmpl
 │   ├── AGENTS.md.tmpl
@@ -69,26 +78,35 @@ seed/
 │   ├── LEARNINGS.md.tmpl
 │   └── TODO.md.tmpl
 ├── .devcontainer/
-│   └── devcontainer.json
+│   └── devcontainer.json      ← seed's own devcontainer (for developing seed)
+├── main.go
+├── wizard.go
+├── scaffold.go
 ├── go.mod
-├── CONTEXT.md (this file)
-└── [Go CLI code to be added]
+└── CONTEXT.md (this file)
+
+Scaffolded output (example):   ← what seed creates for users
+├── README.md
+├── AGENTS.md
+├── DECISIONS.md
+├── TODO.md
+├── LEARNINGS.md               (optional)
+└── .devcontainer/             (optional)
+    ├── devcontainer.json      ← generated via encoding/json
+    └── setup.sh               ← AI chat continuity symlinks (if AI tools selected)
 ```
 
-## Next Steps for TUI
+## TUI Wizard
 
-**Goal**: Beautiful TUI wizard to collect ProjectName, Description, IncludeLearnings
+**Implementation**: Charm's Huh library (form/wizard) with 3 form groups:
+1. **Core info**: ProjectName (Input), Description (Text), IncludeLearnings (Confirm)
+2. **Dev container opt-in**: IncludeDevContainer (Confirm)
+3. **Dev container details** (conditional, hidden unless opted in): DevContainerImage (Select), AIChatTools (MultiSelect)
 
-**Recommended approach**:
-- Use **Charm's Huh** library (form/wizard library, very pretty)
-- 3 form fields: text input, textarea, confirm
-- Render templates with collected data
-- Write to target directory
-
-**Dependencies to add**:
-```go
-github.com/charmbracelet/huh
-```
+**Devcontainer generation**: Uses `encoding/json` programmatically (not text/template) because:
+- JSON with conditional fields is fragile in text/template (trailing commas, escaping)
+- Guarantees valid JSON output
+- Avoids go:embed subdirectory complications
 
 ## Commands
 
