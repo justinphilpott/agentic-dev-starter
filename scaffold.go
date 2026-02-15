@@ -172,9 +172,14 @@ func (s *Scaffolder) prepareDirectory(targetDir string, allowNonEmpty bool) erro
 	info, err := os.Stat(targetDir)
 
 	if os.IsNotExist(err) {
-		// Directory doesn't exist - create it
+		// Verify parent directory exists before creating
+		parentDir := filepath.Dir(targetDir)
+		if _, err := os.Stat(parentDir); os.IsNotExist(err) {
+			return fmt.Errorf("parent directory %s does not exist — please create it first", parentDir)
+		}
+		// Create only the target directory (not the entire path)
 		// 0755 = rwxr-xr-x (owner: rwx, group: rx, others: rx)
-		if err := os.MkdirAll(targetDir, 0755); err != nil {
+		if err := os.Mkdir(targetDir, 0755); err != nil {
 			return fmt.Errorf("failed to create directory %s: %w", targetDir, err)
 		}
 		return nil

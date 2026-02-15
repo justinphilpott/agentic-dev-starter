@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 
 	"github.com/charmbracelet/huh"
 	"github.com/charmbracelet/lipgloss"
@@ -125,6 +126,25 @@ func run() error {
 func checkTargetDir(targetDir string) (bool, error) {
 	info, err := os.Stat(targetDir)
 	if os.IsNotExist(err) {
+		// Target doesn't exist yet — validate that the parent is reachable and writable
+		parentDir := filepath.Dir(targetDir)
+		parentInfo, err := os.Stat(parentDir)
+		if os.IsNotExist(err) {
+			return false, fmt.Errorf("parent directory %s does not exist", parentDir)
+		}
+		if err != nil {
+			return false, fmt.Errorf("cannot access parent directory %s: %w", parentDir, err)
+		}
+		if !parentInfo.IsDir() {
+			return false, fmt.Errorf("parent path %s is not a directory", parentDir)
+		}
+		// Probe writability by attempting to create and remove a temp file
+		f, err := os.CreateTemp(parentDir, ".seed-check-*")
+		if err != nil {
+			return false, fmt.Errorf("cannot write to parent directory %s: %w", parentDir, err)
+		}
+		f.Close()
+		os.Remove(f.Name())
 		return false, nil // will be created later
 	}
 	if err != nil {

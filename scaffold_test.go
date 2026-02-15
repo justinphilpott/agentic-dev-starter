@@ -263,6 +263,26 @@ func TestNonEmptyDirectoryFails(t *testing.T) {
 	}
 }
 
+func TestParentDirectoryMustExist(t *testing.T) {
+	dir := t.TempDir()
+	target := filepath.Join(dir, "nonexistent", "project")
+
+	s, err := NewScaffolder()
+	if err != nil {
+		t.Fatalf("NewScaffolder: %v", err)
+	}
+	err = s.Scaffold(target, TemplateData{
+		ProjectName: "test",
+		Description: "test",
+	})
+	if err == nil {
+		t.Error("expected error when parent directory does not exist")
+	}
+	if !strings.Contains(err.Error(), "parent directory") {
+		t.Errorf("expected 'parent directory' error, got: %v", err)
+	}
+}
+
 func TestAllImageOptions(t *testing.T) {
 	images := []string{
 		"go:2-1.25-trixie",
