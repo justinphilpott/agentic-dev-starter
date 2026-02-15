@@ -26,6 +26,14 @@ import (
 	"os/exec"
 
 	"github.com/charmbracelet/huh"
+	"github.com/charmbracelet/lipgloss"
+)
+
+// Minimal styles for output messages
+var (
+	successStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("2"))   // green
+	dimStyle     = lipgloss.NewStyle().Foreground(lipgloss.Color("8"))              // gray
+	errorStyle   = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("1"))   // red
 )
 
 // Version of the seed tool
@@ -35,8 +43,7 @@ const Version = "0.1.0"
 func main() {
 	// Run main logic and exit with appropriate code
 	if err := run(); err != nil {
-		// Print error to stderr
-		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		fmt.Fprintf(os.Stderr, "%s %v\n", errorStyle.Render("Error:"), err)
 		os.Exit(1)
 	}
 }
@@ -98,14 +105,17 @@ func run() error {
 
 	// Step 6: Success! Print confirmation
 	fmt.Println()
-	fmt.Printf("✓ Project '%s' created successfully in: %s\n", wizardData.ProjectName, targetDir)
+	fmt.Printf("%s Project %s created in: %s\n",
+		successStyle.Render("✓"),
+		successStyle.Render(wizardData.ProjectName),
+		targetDir)
 	fmt.Println()
-	fmt.Println("Next steps:")
-	fmt.Printf("  cd %s\n", targetDir)
+	fmt.Println(dimStyle.Render("Next steps:"))
+	fmt.Printf(dimStyle.Render("  cd %s")+"\n", targetDir)
 	if templateData.IncludeDevContainer {
-		fmt.Println("  # Open in VS Code and 'Reopen in Container'")
+		fmt.Println(dimStyle.Render("  # Open in VS Code and 'Reopen in Container'"))
 	}
-	fmt.Println("  # Start building!")
+	fmt.Println(dimStyle.Render("  # Start building!"))
 
 	return nil
 }
