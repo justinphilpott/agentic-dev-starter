@@ -34,6 +34,7 @@ type WizardData struct {
 	ProjectName         string
 	Description         string
 	IncludeLearnings    bool
+	InitGit             bool   // Whether to run git init + initial commit
 	IncludeDevContainer bool   // Whether to scaffold .devcontainer/
 	DevContainerImage   string // MCR image tag, e.g. "go:2-1.25-trixie"
 	AIChatContinuity    bool   // Whether to enable AI chat continuity
@@ -83,8 +84,13 @@ func RunWizard() (WizardData, error) {
 				Value(&data.IncludeLearnings),
 		),
 
-		// Group 2: Dev container opt-in
+		// Group 2: Project setup options
 		huh.NewGroup(
+			huh.NewConfirm().
+				Title("Initialize git repository?").
+				Description("Runs git init and creates an initial commit").
+				Value(&data.InitGit),
+
 			huh.NewConfirm().
 				Title("Include a dev container?").
 				Description("Adds .devcontainer/ for containerized development").

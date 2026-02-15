@@ -23,6 +23,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 
 	"github.com/charmbracelet/huh"
 )
@@ -88,7 +89,14 @@ func run() error {
 		return fmt.Errorf("failed to scaffold project: %w", err)
 	}
 
-	// Step 5: Success! Print confirmation
+	// Step 5: Optionally initialize git repository
+	if wizardData.InitGit {
+		if err := initGitRepo(targetDir, wizardData.ProjectName); err != nil {
+			return fmt.Errorf("failed to initialize git: %w", err)
+		}
+	}
+
+	// Step 6: Success! Print confirmation
 	fmt.Println()
 	fmt.Printf("✓ Project '%s' created successfully in: %s\n", wizardData.ProjectName, targetDir)
 	fmt.Println()
@@ -138,6 +146,28 @@ func checkTargetDir(targetDir string) (bool, error) {
 		return false, fmt.Errorf("aborted — directory is not empty")
 	}
 	return true, nil
+}
+
+// initGitRepo runs git init, git add, and an initial commit in the target directory.
+func initGitRepo(targetDir, projectName string) error {
+	commands := []struct {
+		args []string
+	}{
+		{[]string{"git", "init"}},
+		{[]string{"git", "add", "."}},
+		{[]string{"git", "commit", "-m", fmt.Sprintf("Initial scaffold for %s (via seed)", projectName)}},
+	}
+
+	for _, c := range commands {
+		cmd := exec.Command(c.args[0], c.args[1:]...)
+		cmd.Dir = targetDir
+		cmd.Stdout = nil // suppress output
+		cmd.Stderr = nil
+		if err := cmd.Run(); err != nil {
+			return fmt.Errorf("%s failed: %w", c.args[0], err)
+		}
+	}
+	return nil
 }
 
 // parseArgs parses command-line arguments and returns the target directory.
