@@ -23,6 +23,8 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/charmbracelet/huh"
 )
 
 // Version of the seed tool
@@ -57,9 +59,9 @@ func run() error {
 		return err
 	}
 
-	// Step 2: Validate target directory before launching the wizard
-	// Fail fast so users don't fill out the whole form only to hit an error
-	if err := checkTargetDir(targetDir); err != nil {
+	// Step 2: Check target directory and confirm if non-empty
+	allowNonEmpty, err := checkTargetDir(targetDir)
+	if err != nil {
 		return err
 	}
 
@@ -82,7 +84,7 @@ func run() error {
 
 	// Step 4: Convert wizard data to template data and scaffold
 	templateData := wizardData.ToTemplateData()
-	if err := scaffolder.Scaffold(targetDir, templateData); err != nil {
+	if err := scaffolder.Scaffold(targetDir, templateData, allowNonEmpty); err != nil {
 		return fmt.Errorf("failed to scaffold project: %w", err)
 	}
 
@@ -101,26 +103,41 @@ func run() error {
 }
 
 // checkTargetDir validates the target directory before launching the wizard.
-// This catches problems early so users don't fill out the form for nothing.
-func checkTargetDir(targetDir string) error {
+// Returns (allowNonEmpty, error). If the directory is non-empty, prompts the
+// user for confirmation via TUI. Returns true if user confirmed overwrite.
+func checkTargetDir(targetDir string) (bool, error) {
 	info, err := os.Stat(targetDir)
 	if os.IsNotExist(err) {
-		return nil // will be created later
+		return false, nil // will be created later
 	}
 	if err != nil {
-		return fmt.Errorf("cannot access %s: %w", targetDir, err)
+		return false, fmt.Errorf("cannot access %s: %w", targetDir, err)
 	}
 	if !info.IsDir() {
-		return fmt.Errorf("%s exists but is not a directory", targetDir)
+		return false, fmt.Errorf("%s exists but is not a directory", targetDir)
 	}
 	entries, err := os.ReadDir(targetDir)
 	if err != nil {
-		return fmt.Errorf("cannot read %s: %w", targetDir, err)
+		return false, fmt.Errorf("cannot read %s: %w", targetDir, err)
 	}
-	if len(entries) > 0 {
-		return fmt.Errorf("directory %s is not empty (contains %d items)", targetDir, len(entries))
+	if len(entries) == 0 {
+		return false, nil // empty dir, all good
 	}
-	return nil
+
+	// Non-empty — ask user to confirm
+	var confirm bool
+	err = huh.NewConfirm().
+		Title(fmt.Sprintf("Directory %s contains %d items. Continue anyway?", targetDir, len(entries))).
+		Description("Existing files will NOT be overwritten, but new files will be added").
+		Value(&confirm).
+		Run()
+	if err != nil {
+		return false, fmt.Errorf("cancelled: %w", err)
+	}
+	if !confirm {
+		return false, fmt.Errorf("aborted — directory is not empty")
+	}
+	return true, nil
 }
 
 // parseArgs parses command-line arguments and returns the target directory.

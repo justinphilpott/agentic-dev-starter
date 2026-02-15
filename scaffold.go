@@ -115,9 +115,10 @@ func NewScaffolder() (*Scaffolder, error) {
 // - If targetDir exists and is non-empty, returns error (prevents overwrites)
 // - Renders core templates: README.md, AGENTS.md, DECISIONS.md, TODO.md
 // - Conditionally renders LEARNINGS.md if data.IncludeLearnings == true
-func (s *Scaffolder) Scaffold(targetDir string, data TemplateData) error {
+func (s *Scaffolder) Scaffold(targetDir string, data TemplateData, allowNonEmpty ...bool) error {
 	// Step 1: Ensure target directory exists and is safe to use
-	if err := s.prepareDirectory(targetDir); err != nil {
+	nonEmpty := len(allowNonEmpty) > 0 && allowNonEmpty[0]
+	if err := s.prepareDirectory(targetDir, nonEmpty); err != nil {
 		return err
 	}
 
@@ -166,7 +167,7 @@ func (s *Scaffolder) Scaffold(targetDir string, data TemplateData) error {
 // - Directory doesn't exist → create it (0755 permissions)
 // - Directory exists and is empty → use it
 // - Directory exists and has files → error (prevent overwrites)
-func (s *Scaffolder) prepareDirectory(targetDir string) error {
+func (s *Scaffolder) prepareDirectory(targetDir string, allowNonEmpty bool) error {
 	// Check if directory exists
 	info, err := os.Stat(targetDir)
 
@@ -195,7 +196,7 @@ func (s *Scaffolder) prepareDirectory(targetDir string) error {
 		return fmt.Errorf("failed to read directory %s: %w", targetDir, err)
 	}
 
-	if len(entries) > 0 {
+	if len(entries) > 0 && !allowNonEmpty {
 		return fmt.Errorf("directory %s is not empty (contains %d items)", targetDir, len(entries))
 	}
 
